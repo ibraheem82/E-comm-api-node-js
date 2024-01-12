@@ -10,6 +10,7 @@ const app = express();
 // parse incoming datas
 app.use(express.json());
 
+// @Routes
 app.use('/', userRoutes);
 
 export default app;
