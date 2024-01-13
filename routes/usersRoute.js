@@ -3,7 +3,8 @@ import { registerUserCtrl, loginUserCtrl, getUserProfile } from '../controllers/
 
 const userRoutes = express.Router();
 
-userRoutes.post('/api/v1/users/register', registerUserCtrl);
-userRoutes.post('/api/v1/users/login', loginUserCtrl);
+userRoutes.post('/register', registerUserCtrl);
+userRoutes.post('/login', loginUserCtrl);
+userRoutes.get('/profile', getUserProfile);
 
 export default userRoutes;
