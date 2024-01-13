@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import asyncHandler from "express-async-handler";
 import bcrypt from "bcryptjs";
 
 // @desc Register User
