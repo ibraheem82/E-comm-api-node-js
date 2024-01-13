@@ -6,15 +6,13 @@ import bcrypt from "bcryptjs";
 // @route POST /api/v1/users/register
 // @access Private/Admin
 
-export const registerUserCtrl = async(req, res) => {
+export const registerUserCtrl = asyncHandler(async(req, res) => {
     const {fullname, email, password} = req.body;
 
     // * Check if user exist
     const userExists = await User.findOne({email});
     if (userExists) {
-        res.json({
-            msg: "User already exists⚠",
-        });
+        throw new Error('User already exists ⚠');
     }
 
     // -> HASHING
@@ -33,31 +31,29 @@ export const registerUserCtrl = async(req, res) => {
         message: 'User Registered Successfully✅',
         data:user
     });
-};
+});
 
 
 
 // @desc Login User
 // @route POST /api/v1/users/login
 // @access Public
-export const loginUserCtrl = async(req, res) => {
-    const {email, password} = req.body;
-
-    // * Find user in database by email only.
-
-    const userFound = await User.findOne({
-        email,
-    });
-
-    if(userFound && await bcrypt.compare(password, userFound?.password)){
-        res.json({
-            status:'success',
-            msg:'User logged in successfully✔',
-            userFound
-        }); 
-    } else{
-        res.json({
-            msg:'Invalid login❌'
+export const loginUserCtrl = asyncHandler(async(req, res) => {
+        const {email, password} = req.body;
+    
+        // * Find user in database by email only.
+    
+        const userFound = await User.findOne({
+            email,
         });
-    }
-}
+    
+        if(userFound && await bcrypt.compare(password, userFound?.password)){
+            res.json({
+                status:'success',
+                msg:'User logged in successfully✔',
+                userFound
+            }); 
+        } else{
+            throw new Error('Invalid login credentials') 
+        }
+    });
