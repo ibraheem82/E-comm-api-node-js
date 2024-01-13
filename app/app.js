@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 
 // @Routes
-app.use('/', userRoutes);
+app.use('/api/v1/users/', userRoutes);
 
 
 // * Err Middleware
