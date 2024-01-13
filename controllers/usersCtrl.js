@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import asyncHandler from "express-async-handler";
 import bcrypt from "bcryptjs";
+import generateToken from "../utils/generateToken.js";
 
 // @desc Register User
 // @route POST /api/v1/users/register
