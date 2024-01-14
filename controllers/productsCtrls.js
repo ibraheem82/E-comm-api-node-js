@@ -38,6 +38,7 @@ export const createProductCtrl = asyncHandler(async(req, res) => {
 // @access Public
 
 export const getProductsCtrl = asyncHandler(async(req, res) => {
+    console.log(req.query)
     let productQuery = Product.find();
 
     // * SEARCHING PRODUCTS BY NAME.
@@ -56,7 +57,7 @@ export const getProductsCtrl = asyncHandler(async(req, res) => {
     }
 
 
-    // * filter by category
+    // * filter by category.
     if(req.query.category){
         productQuery = productQuery.find({
             category:{ $regex: req.query.category, $options:"i" },
@@ -64,22 +65,30 @@ export const getProductsCtrl = asyncHandler(async(req, res) => {
     }
 
 
-        // * filter by color
+        // * filter by color.
     if(req.query.color){
         productQuery = productQuery.find({
             colors:{ $regex: req.query.color, $options:"i" },
         });
     }
 
-    // * filter by size
+    // * filter by size.
     if(req.query.size){
         productQuery = productQuery.find({
             sizes:{ $regex: req.query.size, $options:"i" },
         });
     }
 
-    const products = await productQuery;
+    // * filter by price range.
+    if(req.query.price){
+        const priceRange = req.query.price.split("-");
+        productQuery = productQuery.find({
+                price: {$gt: priceRange[0], $lte: priceRange[1]},
+        });
+    }
 
+
+    const products = await productQuery;
     res.json({
         status: "success",
         products,
