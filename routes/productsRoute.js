@@ -1,5 +1,5 @@
 import express from 'express';
-import { createProductCtrl } from '../controllers/productsCtrls.js';
+import { createProductCtrl, getProductsCtrl } from '../controllers/productsCtrls.js';
 import { isLoggedIn } from '../middlewares/isLoggedin.js';
 
 
