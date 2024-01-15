@@ -12,7 +12,7 @@ import productRouter from "../routes/productsRoute.js";
 dbConnect();
 const app = express();
 
-// parse incoming datas
+// parse incoming datas, meaning the datas coming in the {req}, will be converted as json.
 app.use(express.json());
 
 // @Routes
