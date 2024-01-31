@@ -8,6 +8,6 @@ const productRouter = express.Router();
 productRouter.post('/', isLoggedIn, createProductCtrl);
 productRouter.get('/', getProductsCtrl);
 productRouter.get('/:id', getProductCtrl);
-productRouter.put('/:id', updateProductCtrl);
+productRouter.put('/:id', isLoggedIn, updateProductCtrl);
 
 export default productRouter;
