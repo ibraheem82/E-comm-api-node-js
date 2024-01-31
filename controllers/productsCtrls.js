@@ -145,3 +145,33 @@ export const getProductCtrl = asyncHandler(async(req, res) => {
         product
     });
 })
+
+
+// @desc Update Product
+// @route GET /api/products/:id
+// @access Public
+
+export const updateProductCtrl = asyncHandler(async(req, res) => {
+    const {name, description, category, sizes, colors, user, price, totalQty, brand} = req.body;
+
+    const product = await Product.findByIdAndUpdate(req.params.id, {
+         name,
+         description, 
+         category,
+          sizes,
+          colors, 
+          user : req.userAuthId,
+          price,
+          totalQty,
+          brand,
+    }, {
+        new: true,
+    }
+    );
+    
+    res.json({
+        status: "success",
+        message: "Product updated successfully✅",
+        product
+    });
+})
