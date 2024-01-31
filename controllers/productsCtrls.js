@@ -87,6 +87,7 @@ export const getProductsCtrl = asyncHandler(async(req, res) => {
         });
     }
 
+         
 
     const products = await productQuery;
     res.json({
