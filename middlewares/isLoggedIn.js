@@ -13,7 +13,7 @@ export const isLoggedIn = (req, res, next) => {
     // retrieve an authentication token from the request headers and store it in the token variable.
     const token = getTokenFromHeader(req)
 
-    // passing the retrieved token as an argument. The function likely validates the token and, if successful, returns a decoded user object containing information about the authenticated user.
+    // passing the retrieved token as an argument. The function validates the token and, if successful, returns a decoded user object containing information about the authenticated user.
     const decodedUser = verifyToken(token);
     // checks if the verifyToken function returned a valid decodedUser object:
 
