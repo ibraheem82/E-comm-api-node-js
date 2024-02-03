@@ -184,9 +184,6 @@ export const updateProductCtrl = asyncHandler(async(req, res) => {
 
 export const deleteProductCtrl = asyncHandler(async(req, res) => {
  await Product.findByIdAndDelete(req.params.id);
-    if(!product){
-        throw new Error("Product not found⚠")
-    }
     res.json({
         status: "success",
         message: "Product deleted successfully✅",
