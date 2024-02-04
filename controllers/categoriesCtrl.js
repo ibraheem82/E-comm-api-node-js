@@ -4,8 +4,6 @@ import asyncHandler from "express-async-handler";
 // @desc Create new category
 // @route POST /api/v1/categories
 // @access Pivate/admin
-
-
 export const createCategoryCtrl = asyncHandler(async(req, res) => {
     const {name} = req.body;
     const categoryFound = await Category.findOne({name})
@@ -31,8 +29,6 @@ export const createCategoryCtrl = asyncHandler(async(req, res) => {
 // @desc Get all categories
 // @route GET /api/categories
 // @access Public
-
-
 export const getAllCategoriesCtrl = asyncHandler(async(req, res) => {
     const categories = await Category.find();
 
@@ -88,11 +84,10 @@ export const updateCategoryCtrl = asyncHandler(async(req, res) => {
 // @desc Delete Category
 // @route GET /api/categories/:id/delete
 // @access Pivate/admin
-
 export const deleteCategoryCtrl = asyncHandler(async(req, res) => {
     await Category.findByIdAndDelete(req.params.id);
        res.json({
            status: "success",
            message: "Category deleted successfully✅",
        });
-   })
+})
