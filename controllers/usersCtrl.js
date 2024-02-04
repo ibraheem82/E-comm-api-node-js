@@ -61,7 +61,7 @@ export const loginUserCtrl = asyncHandler(async(req, res) => {
         } else{
             throw new Error('Invalid login credentials') 
         }
-    });
+});
 
 
 // @desc Get user profile
