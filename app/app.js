@@ -22,6 +22,7 @@ app.use(express.json());
 app.use('/api/v1/users/', userRoutes);
 app.use('/api/v1/products/', productRouter);
 app.use('/api/v1/categories/', categoriesRouter);
+app.use('/api/v1/brands/', brandsRouter);
 
 
 // * Err Middleware
