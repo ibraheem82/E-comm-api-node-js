@@ -8,6 +8,7 @@ import { globalErrHandler, notFound } from '../middlewares/globalErrHandler.js';
 import userRoutes from '../routes/usersRoute.js';
 import productRouter from "../routes/productsRoute.js";
 import categoriesRouter from "../routes/categoriesRouter.js";
+import brandsRouter from "../routes/brandsRouter.js";
 
 
 // * Database Connection.
