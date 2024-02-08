@@ -61,7 +61,7 @@ export const getSingleBrandCtrl = asyncHandler(async(req, res) => {
 // @route PUT /api/brands/:id
 // @access Private/admin
 
-export const updateCtrl = asyncHandler(async(req, res) => {
+export const updateBrandCtrl = asyncHandler(async(req, res) => {
     const {name} = req.body;
 
     const brand = await Brand.findByIdAndUpdate(req.params.id,
