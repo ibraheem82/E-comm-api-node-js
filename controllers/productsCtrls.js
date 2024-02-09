@@ -50,6 +50,12 @@ export const createProductCtrl = asyncHandler(async(req, res) => {
     categoryFound.products.push(product._id);
     await categoryFound.save();
 
+
+    // Push product into brand
+
+    brandFound.products.push(product._id);
+    await brandFound.save();
+
     res.json({
         status:'success',
         message: 'Product created Successfully✅',
