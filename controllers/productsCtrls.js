@@ -30,7 +30,6 @@ export const createProductCtrl = asyncHandler(async(req, res) => {
          category,
           sizes,
           colors, 
-          user : req.userAuthId,
           price,
           totalQty,
           brand,
