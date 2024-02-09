@@ -22,6 +22,8 @@ export const createProductCtrl = asyncHandler(async(req, res) => {
         throw new Error("Category not found, please create category first or check category name");
     }
 
+
+  
     const product = await Product.create({
         name,
          description, 
