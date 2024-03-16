@@ -89,6 +89,18 @@ They offer flexibility by allowing you to compute values on the fly without stor
  */
 
 // Virtuals
+// qty left
+
+ProductSchema.virtual('qtyLeft').get(function(){
+  const product = this
+  return product.totalQty - product.totalSold;
+});
+
+
+
+
+
+
 // Total rating
 
 /**
@@ -102,8 +114,8 @@ const product = this;
 return product?.reviews?.length;
 });
 
-// Average rating
 
+// Average rating
 
 /** *
  * Purpose: Calculates the average rating of a product based on its reviews.
