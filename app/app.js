@@ -11,6 +11,7 @@ import categoriesRouter from "../routes/categoriesRouter.js";
 import brandsRouter from "../routes/brandsRouter.js";
 import colorRouter from "../routes/colorRouter.js";
 import reviewRouter from "../routes/reviewRouter.js";
+import orderRouter from "../routes/ordersRouter.js";
 
 // * Database Connection.
 dbConnect();
@@ -26,6 +27,7 @@ app.use('/api/v1/categories/', categoriesRouter);
 app.use('/api/v1/brands/', brandsRouter);
 app.use('/api/v1/colors/', colorRouter);
 app.use('/api/v1/reviews/', reviewRouter);
+app.use('/api/v1/orders/', orderRouter);
 
 
 // * Err Middleware
