@@ -17,13 +17,17 @@ export const creatReviewCtrl = asyncHandler(async(req, res) => {
 
     // find product by it id
     const {productID} = req.params;
-    const productFound = await Product.findById(productID).populate('reviews')
+    const productFound = await Product.findById(productID).populate('reviews') // eagerly load existing reviews associated with the product.
     if(!productFound){
         throw new Error('Product Not Found');
     }
 
     // ! checking if the user already reviewed the project or not.
-
+    /*
+   ()-> Checks if the current user has already submitted a review for this product:
+   ()->  Compares the review's associated user ID with the ID of the currently logged-in user.
+   ()-> 
+    */
 const hasReviewed = productFound?.reviews?.find((review) => {
     return review?.user.toString() === req.userAuthId.toString();
 });
@@ -41,7 +45,7 @@ if(hasReviewed){
     });
 
     // ! after successfully creating the review push it into the product found.
-
+    //  Adds the newly created review's ID to the product's list of reviews.
     productFound.reviews.push(review?._id)
     // ! Then resave the product
     await productFound.save();
