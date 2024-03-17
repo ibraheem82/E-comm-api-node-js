@@ -77,3 +77,34 @@ export const getUserProfile = asyncHandler(async(req, res) => {
         msg:"Profile page.",
     });
 });
+
+
+// @desc Update user shipping address
+// @route POST /api/v1/users/update/shipping
+// @access Private
+
+export const updateShippingAddressCtrl = asyncHandler(async(req, res) => {
+    const {firstName, lastName, address, city, postalCode, province, phone} = req.body;
+    // Retrieves the user document from the database based on the ID of the authenticated user 
+    // verifies the user's access and populates the request object with the authenticated user's ID.
+    const user = await User.findByIdAndUpdate(req.userAuthId, {
+        // This field is updated with the new address information provided in the request.
+        shippingAddress:{
+            firstName, lastName, address, city, postalCode, province, phone
+        },
+        // This flag is set to true to indicate that the user now has a saved shipping address.
+        hasShippingAddress: true
+    },
+    {   
+        // This option instructs Mongoose to return the updated user document in the response.
+        // Mongoose to return the updated version of the user document after the modification.
+        new:true,
+    }
+    );
+
+    res.json({
+        status:"Success",
+        message: "User shipping address updated successfully",
+        user,
+    });
+});
