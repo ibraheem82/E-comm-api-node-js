@@ -2,6 +2,9 @@ import asyncHandler from "express-async-handler";
 import Order from "../models/Order.js";
 import Product from "../models/Product.js";
 import User from "../models/User.js";
+import Stripe from "stripe";
+import dotenv from "dotenv";
+dotenv.config();
 
 
 // @desc Create new orders
