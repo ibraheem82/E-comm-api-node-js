@@ -11,6 +11,9 @@ dotenv.config();
 // @route POST /api/v1/orders
 // @access Private
 
+// * Stripe instance
+
+const stripe = new Stripe(process.env.STRIPE_KEY);
 
 export const createOrderCtrl = asyncHandler(async(req, res) => {
     // get payload(customer, orderItems, shippingAddress, totalPrice)
