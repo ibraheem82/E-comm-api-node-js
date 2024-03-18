@@ -13,6 +13,7 @@ import brandsRouter from "../routes/brandsRouter.js";
 import colorRouter from "../routes/colorRouter.js";
 import reviewRouter from "../routes/reviewRouter.js";
 import orderRouter from "../routes/ordersRouter.js";
+import Order from "../models/Order.js";
 
 // * Database Connection.
 dbConnect();
