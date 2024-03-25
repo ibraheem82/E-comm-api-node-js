@@ -2,7 +2,7 @@ import express from 'express';
 
 import { isLoggedIn } from '../middlewares/isLoggedin.js';
 import { createBrandCtrl, deleteBrandCtrl, getAllBrandsCtrl, getSingleBrandCtrl, updateBrandCtrl} from '../controllers/brandCtrl.js';
-good
+
 
 const brandsRouter = express.Router();
 brandsRouter.post('/', isLoggedIn, createBrandCtrl)
