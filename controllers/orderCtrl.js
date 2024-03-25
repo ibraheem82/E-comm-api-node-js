@@ -44,7 +44,7 @@ export const createOrderCtrl = asyncHandler(async(req, res) => {
 
 
     // Update the product qty
-    const products = await Product.find({_id:{$in:orderItems}})
+    const products = await Product.find({ _id: { $in:orderItems }})
     orderItems?.map(async (order)=>{
         const product = products?.find((product) => {
             return product?._id?.toString() === order?._id?.toString();
@@ -62,12 +62,43 @@ export const createOrderCtrl = asyncHandler(async(req, res) => {
     await user.save();
   
     // make payment (stripe)
-    // Payment webhook
-    // Update the user order
-    res.json({
-        success: true,
-        message: "Order created",
-        order,
-        user,
+    // Convert order items to have same structure that stripe need.
+    // for each thing in the orderItems
+    /*
+    Transforms an array of order items (orderItems) into a format compatible with Stripe's Checkout API. Each item is likely an object with properties like name, description, price, and quantity.
+    .map(): Iterates over the orderItems array, converting each item into a new object.
+    */
+    const convertedOrders = orderItems.map((item)=> {
+        return{
+            price_data:{
+                currency:'usd',
+                product_data:{
+                    name: item?.name,
+                    description: item?.description,
+                },
+                unit_amount : item?.price * 100,
+            },
+
+            quantity: item?.qty
+        };
+
     });
+
+    //  Initiates the creation of a Stripe Checkout session.
+    const session = await stripe.checkout.sessions.create({
+        line_items: convertedOrders,
+        metadata:{
+            // access to the order id inside the wenhook.
+            orderId : JSON.stringify(order?._id),
+        },
+        // Indicates this is a session for collecting payment.
+        mode:'payment',
+        success_url:'http://localhost:3000/success',
+        cancel_url: 'http://localhost:3000/cancel',
+    });
+    res.send({
+        // The generated URL where Stripe will host the actual checkout page.
+        url:session.url
+    });
+    
 });
